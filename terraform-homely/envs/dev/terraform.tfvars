@@ -1,0 +1,8 @@
+cidr-block = "10.173.0.0/16"
+instance-tenancy = "default"
+name-tag = {
+  Name = "homely-vpc"
+}
+public-subnet-cidr = [ "10.173.0.0/24", "10.173.1.0/24", "10.173.2.0/24" ]
+private-subnet-cidr = [ "10.173.3.0/24", "10.173.4.0/24", "10.173.5.0/24" ]
+availability-zone = [ "us-east-1a", "us-east-1b", "us-east-1c" ]
