@@ -1,4 +1,4 @@
-variable "main-bucket" {
+variable "hosting-bucket" {
   type = string
 }
 variable "" {
