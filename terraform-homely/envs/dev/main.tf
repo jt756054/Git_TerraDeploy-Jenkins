@@ -13,4 +13,5 @@ module "storage" {
   source = "../../modules/storage"
 
   hosting-bucket = var.hosting-bucket
+  source-index = var.source-index
 }

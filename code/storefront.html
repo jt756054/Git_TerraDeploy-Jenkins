@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sumens — Move. Breathe. Become.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1115;            /* deep charcoal */
+      --bg-2: #13161d;          /* slightly lighter charcoal */
+      --text: #e9edf1;          /* near-white */
+      --muted: #b9c2cc;         /* muted text */
+      --accent: #6ee7c8;        /* mint / refreshing */
+      --accent-2: #47c6b0;      /* teal */
+      --lux: #d7b46a;           /* soft champagne gold */
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.06);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% 10%, #1c2030 0%, transparent 50%),
+                  radial-gradient(1200px 800px at 100% 0%, #1a2b27 0%, transparent 45%),
+                  linear-gradient(160deg, var(--bg) 0%, var(--bg-2) 60%);
+      background-attachment: fixed;
+    }
+
+    /* Header */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(120%) blur(8px);
+      background: linear-gradient(180deg, rgba(15,17,21,.85), rgba(15,17,21,.55));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand {
+      font-family: "Playfair Display", serif; letter-spacing: .6px; font-weight: 700; font-size: 1.35rem;
+      color: var(--text);
+    }
+    .brand em { color: var(--lux); font-style: normal; }
+    .nav a { color: var(--text); text-decoration: none; opacity: .9; }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .cta {
+      padding: 10px 16px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #0c1117; font-weight: 600; box-shadow: var(--shadow); border: none;
+    }
+
+    /* Mobile nav */
+    .menu-btn { display: none; background: transparent; border: 0; color: var(--text); font-size: 24px; }
+    @media (max-width: 860px){
+      .nav-links { display: none; }
+      .menu-btn { display: block; }
+    }
+
+    /* Hero */
+    .hero {
+      position: relative; isolation: isolate; overflow: hidden;
+      min-height: 85vh; display: grid; place-items: center; text-align: center; padding: 90px 0 60px;
+    }
+    .hero::after{
+      content:""; position: absolute; inset: -10% -10% auto -10%; height: 100%; z-index: -1;
+      background: url('https://images.unsplash.com/photo-1546484959-f6a7f4b15551?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+      filter: saturate(85%) contrast(105%) brightness(.65);
+      transform: scale(1.05);
+    }
+    .hero-overlay{ position: absolute; inset: 0; background: radial-gradient(60% 60% at 50% 40%, rgba(11,18,21,.15), rgba(11,18,21,.85)); z-index: -1; }
+    .hero h1{ font-family: "Playfair Display", serif; font-weight: 700; font-size: clamp(2.2rem, 6vw, 4rem); margin: 0 0 10px; letter-spacing: .4px; }
+    .hero p{ color: var(--muted); max-width: 720px; margin: 0 auto 26px; font-size: clamp(1rem, 2.2vw, 1.15rem); }
+    .hero .badges{ display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .pill { border: 1px solid rgba(255,255,255,.18); padding: 8px 14px; border-radius: 999px; color: var(--muted); font-size: .92rem; background: rgba(255,255,255,.04); }
+
+    /* Cards */
+    .grid { display: grid; gap: 22px; grid-template-columns: repeat(12, 1fr); }
+    .card { grid-column: span 4; background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform .2s ease, background .2s ease; }
+    .card:hover { transform: translateY(-4px); background: rgba(255,255,255,.07); }
+    .card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+    .card .inner{ padding: 18px; }
+    .card h3{ font-family: "Playfair Display", serif; margin: 2px 0 8px; font-size: 1.25rem; }
+    .card p{ color: var(--muted); margin: 0; font-size: .98rem; }
+    @media (max-width: 1080px){ .card { grid-column: span 6; } }
+    @media (max-width: 680px){ .card { grid-column: span 12; } }
+
+    /* Section */
+    section { padding: 70px 0; }
+    .section-head { display:flex; justify-content: space-between; align-items: end; gap: 14px; margin-bottom: 26px; }
+    .section-head h2 { font-family: "Playfair Display", serif; font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 0; }
+    .section-head p { color: var(--muted); max-width: 700px; }
+
+    /* Program list */
+    .programs{ display:grid; gap:18px; grid-template-columns: repeat(3, 1fr); }
+    .program{ background: var(--glass); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 18px; display:flex; gap:14px; align-items:center; }
+    .program svg{ flex: 0 0 32px; opacity:.9 }
+    @media (max-width: 900px){ .programs{ grid-template-columns: 1fr; } }
+
+    /* Testimonial */
+    .testimonial { background: linear-gradient(120deg, rgba(110,231,200,.08), rgba(215,180,106,.08)); border: 1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 22px; display:grid; gap: 16px; grid-template-columns: 96px 1fr; align-items: center; }
+    .avatar{ width: 96px; height: 96px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,.25); }
+    blockquote { margin:0; color: var(--text); font-size: 1.05rem; line-height: 1.6; }
+    cite { color: var(--muted); font-style: normal; font-size:.95rem }
+
+    /* Pricing */
+    .pricing{ display:grid; gap:22px; grid-template-columns: repeat(3, 1fr); }
+    .plan { background: var(--card); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: relative; }
+    .plan.highlight { border-color: rgba(215,180,106,.45); box-shadow: 0 12px 40px rgba(215,180,106,.15); }
+    .price { font-size: 2.1rem; font-weight: 700; letter-spacing: .4px; }
+    .plan ul { margin: 14px 0 0; padding: 0; list-style: none; color: var(--muted); }
+    .plan li { padding: 6px 0; }
+
+    /* Gallery */
+    .mosaic { display: grid; gap: 12px; grid-template-columns: repeat(12, 1fr); }
+    .mosaic img { width:100%; height: 100%; object-fit: cover; border-radius: 12px; }
+    .m1{ grid-column: span 5; height: 220px; }
+    .m2{ grid-column: span 4; height: 220px; }
+    .m3{ grid-column: span 3; height: 220px; }
+    @media (max-width: 900px){ .m1,.m2,.m3{ grid-column: span 12; height: 200px; } }
+
+    /* Footer */
+    footer { padding: 60px 0; border-top: 1px solid rgba(255,255,255,.06); background: linear-gradient(180deg, rgba(19,22,29,.6), rgba(19,22,29,.2)); }
+    .foot { display:flex; align-items:center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .foot small { color: var(--muted); }
+    .social a { color: var(--text); opacity: .85; text-decoration: none; margin-right: 14px; }
+
+    /* Buttons */
+    .btn {
+      display:inline-flex; align-items:center; gap:10px; text-decoration:none; font-weight:600; color:#0c1117;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2)); padding: 12px 18px; border-radius: 999px; box-shadow: var(--shadow);
+    }
+    .btn-ghost { background: transparent; color: var(--text); border:1px solid rgba(255,255,255,.18); padding: 11px 16px; border-radius: 999px; }
+
+    /* Gold underline */
+    .underline { background: linear-gradient(90deg, var(--lux), transparent); height: 3px; width: 68px; border-radius: 2px; margin: 10px 0 0; }
+
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header class="nav">
+    <div class="container">
+      <div class="row" style="height:64px;">
+        <a href="#top" class="brand" aria-label="Sumens Home"><em>Sumens</em> Fitness</a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#services">Services</a>
+          <a href="#programs">Programs</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact" class="cta">Start</a>
+        </nav>
+        <button class="menu-btn" aria-label="Open menu" onclick="document.querySelector('.mobile').classList.toggle('open')">☰</button>
+      </div>
+    </div>
+    <!-- Mobile Drawer -->
+    <div class="mobile" style="display:none"></div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="container">
+        <div class="badges" style="margin-bottom:18px;">
+          <span class="pill">Luxury • Minimalist • Refreshing</span>
+          <span class="pill">Strength • Mobility • Mindfulness</span>
+        </div>
+        <h1>Luxury fitness, <span style="color:var(--accent)">without the noise</span>.</h1>
+        <p>Sumens blends evidence‑based training, breathwork, and recovery into serene experiences. Move with intent, recover with grace, and feel your best—every day.</p>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+          <a class="btn" href="#pricing">Join Now</a>
+          <a class="btn-ghost" href="#services">Explore Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Services crafted for balance</h2>
+            <div class="underline"></div>
+          </div>
+          <p>Personal training, group sessions, and on‑demand coaching—delivered with minimalist design and maximal care.</p>
+        </div>
+        <div class="grid">
+          <article class="card" aria-label="Personal Training">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1600&auto=format&fit=crop" alt="Coach guiding a client through strength training"/>
+            <div class="inner">
+              <h3>Personal Training</h3>
+              <p>1:1 coaching tailored to your physiology and schedule. Precision programming with simple, effective progressions.</p>
+            </div>
+          </article>
+          <article class="card" aria-label="Mindful Mobility">
+            <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1600&auto=format&fit=crop" alt="Person in a calm yoga stretch in a minimal studio"/>
+            <div class="inner">
+              <h3>Mindful Mobility</h3>
+              <p>Breath‑led mobility flows that unlock range, reduce stress, and restore posture—chill vibes only.</p>
+            </div>
+          </article>
+          <article class="card" aria-label="Recovery & Breathwork">
+            <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1600&auto=format&fit=crop" alt="Cold plunge and sauna room with minimalist design"/>
+            <div class="inner">
+              <h3>Recovery & Breathwork</h3>
+              <p>Contrast therapy, guided breathwork, and soft‑tissue care to speed recovery and calm your nervous system.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Programs -->
+    <section id="programs">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Active, minimalist programs</h2>
+            <div class="underline"></div>
+          </div>
+          <p>Pick a path that matches your energy. Each includes coaching check‑ins and a clean, distraction‑free app experience.</p>
+        </div>
+        <div class="programs">
+          <div class="program">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 9l5-5 5 5M7 15l5 5 5-5" stroke="currentColor" stroke-width="1.5"/></svg>
+            <div>
+              <strong>FOUNDATION</strong>
+              <div style="color:var(--muted)">3 days/week • 45 min • Strength + Mobility</div>
+            </div>
+          </div>
+          <div class="program">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.5"/></svg>
+            <div>
+              <strong>FLOW</strong>
+              <div style="color:var(--muted)">Daily mobility + breath reset • 20 min</div>
+            </div>
+          </div>
+          <div class="program">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18M12 3v18" stroke="currentColor" stroke-width="1.5"/></svg>
+            <div>
+              <strong>PEAK</strong>
+              <div style="color:var(--muted)">Athlete‑grade cycles • Strength + Conditioning</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section aria-label="Client story">
+      <div class="container">
+        <div class="testimonial">
+          <img class="avatar" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop" alt="Client portrait" />
+          <div>
+            <blockquote>“Sumens is the first studio where I train hard and leave calmer than I arrived. It’s luxurious, gentle, and wildly effective.”</blockquote>
+            <cite>— Mara J., member since 2024</cite>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Simple, transparent pricing</h2>
+            <div class="underline"></div>
+          </div>
+          <p>Memberships include studio access, towel service, and recovery lounge. Cancel or switch anytime.</p>
+        </div>
+        <div class="pricing">
+          <div class="plan" aria-label="Essential Plan">
+            <div class="price">$89<span style="font-size: .9rem; color:var(--muted);">/mo</span></div>
+            <ul>
+              <li>Studio access (off‑peak)</li>
+              <li>On‑demand mobility flows</li>
+              <li>Quarterly check‑in</li>
+            </ul>
+          </div>
+          <div class="plan highlight" aria-label="Plus Plan">
+            <div class="price">$149<span style="font-size: .9rem; color:var(--muted);">/mo</span></div>
+            <ul>
+              <li>All‑day studio access</li>
+              <li>2 coached sessions / month</li>
+              <li>Recovery lounge access</li>
+              <li>Contrast therapy add‑on</li>
+            </ul>
+          </div>
+          <div class="plan" aria-label="Elite Plan">
+            <div class="price">$299<span style="font-size: .9rem; color:var(--muted);">/mo</span></div>
+            <ul>
+              <li>Weekly 1:1 training</li>
+              <li>Custom program cycles</li>
+              <li>Priority booking</li>
+              <li>Concierge recovery</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Spaces that breathe</h2>
+            <div class="underline"></div>
+          </div>
+          <p>Minimalist textures. Natural light. Calm energy. A setting designed to help you move and recover with ease.</p>
+        </div>
+        <div class="mosaic" aria-label="Studio gallery">
+          <img class="m1" src="https://images.unsplash.com/photo-1549068106-b024baf5062d?q=80&w=1600&auto=format&fit=crop" alt="Minimalist lounge with natural light" />
+          <img class="m2" src="https://images.unsplash.com/photo-1594737625785-c6683fc23a4e?q=80&w=1600&auto=format&fit=crop" alt="Clean gym equipment neatly arranged" />
+          <img class="m3" src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=1200&auto=format&fit=crop" alt="Spa‑like shower and sauna" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Ready when you are</h2>
+            <div class="underline"></div>
+          </div>
+          <p>Book a tour, ask a question, or get matched to a coach in minutes.</p>
+        </div>
+        <div class="row" style="align-items: stretch; gap: 22px; flex-wrap: wrap;">
+          <div style="flex:1; min-width:280px; background: var(--glass); border:1px solid rgba(255,255,255,.08); border-radius: var(--radius); padding: 20px;">
+            <form onsubmit="event.preventDefault(); window.location.href='mailto:@sumens.click?subject=Sumens%20Inquiry&body=Hi%20Sumens%2C%20I%27m%20interested%20in%20...'" aria-label="Quick contact form">
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Your name" required style="display:block;width:100%;margin:6px 0 12px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)">
+
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" required style="display:block;width:100%;margin:6px 0 12px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)">
+
+              <label for="msg">Message</label>
+              <textarea id="msg" name="message" placeholder="Tell us about your goals..." rows="4" style="display:block;width:100%;margin:6px 0 16px;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:var(--text)"></textarea>
+
+              <button class="btn" type="submit">Contact @sumens.click</button>
+            </form>
+          </div>
+
+          <div style="flex:1; min-width:280px; display:grid; place-items:center; border-radius: var(--radius); overflow:hidden; position:relative;">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=1600&auto=format&fit=crop" alt="Trainer guiding a client through a calm workout" style="width:100%; height:100%; object-fit: cover; filter: brightness(.8) saturate(.9);"/>
+            <div style="position:absolute; inset:auto 16px 16px auto; background: rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.18); padding:10px 14px; border-radius: 12px;">
+              <div style="font-weight:600">Studio hours</div>
+              <div style="color:var(--muted)">Mon–Sun • 6a–10p</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <div class="brand"><em>Sumens</em> Fitness</div>
+      <small>© <span id="y"></span> Sumens. All rights reserved.</small>
+      <div class="social">
+        <a href="mailto:@sumens.click" aria-label="Email">@sumens.click</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile drawer (simple)
+    const drawer = document.querySelector('.mobile');
+    drawer.innerHTML = `
+      <nav style="display:flex; flex-direction:column; gap: 10px; padding: 12px 20px; border-top:1px solid rgba(255,255,255,.08); background: rgba(15,17,21,.95);">
+        <a style="padding: 10px 0; color: var(--text); text-decoration:none;" href="#services" onclick="drawer.classList.remove('open')">Services</a>
+        <a style="padding: 10px 0; color: var(--text); text-decoration:none;" href="#programs" onclick="drawer.classList.remove('open')">Programs</a>
+        <a style="padding: 10px 0; color: var(--text); text-decoration:none;" href="#pricing" onclick="drawer.classList.remove('open')">Pricing</a>
+        <a style="padding: 10px 0; color: var(--text); text-decoration:none;" href="#gallery" onclick="drawer.classList.remove('open')">Gallery</a>
+        <a class="cta" style="display:inline-block; text-align:center; margin-top: 4px;" href="#contact" onclick="drawer.classList.remove('open')">Start</a>
+      </nav>`;
+    const style = document.createElement('style');
+    style.textContent = `.mobile{transition:max-height .25s ease; overflow:hidden;}.mobile.open{display:block; max-height: 260px;}.mobile:not(.open){max-height:0;}`;
+    document.head.appendChild(style);
+
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
