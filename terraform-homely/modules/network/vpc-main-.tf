@@ -58,17 +58,34 @@ resource "aws_route_table_association" "public-rt" {
   subnet_id      = aws_subnet.public-subnet[count.index].id
   route_table_id = aws_route_table.public-rt.id
 }
+resource "aws_eip" "ngw" {
+  domain   = "vpc"
+}
+resource "aws_nat_gateway" "private-subnet-ngw" {
+  allocation_id = aws_eip.ngw.id
+  subnet_id     = aws_subnet.public-subnet[0].id
+  
+  depends_on = [aws_internet_gateway.igw]
+  
+  tags = {
+    Name = "private-subnet-ngw"
+  }
+}
+resource "aws_route_table" "private-rt" {
+  vpc_id = aws_vpc.homely-vpc.id
 
-# resource "aws_route_table" "private-rt" {
-#   vpc_id = aws_vpc.homely-vpc.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.private-subnet-ngw.id
+  }
 
-#   route {
-    
-#     cidr_block = "0.0.0.0/0"
-#     gateway_id = aws_internet_gateway.igw.id
-#   }
+  tags = {
+    Name = "homely-private-rt"
+  }
+}
+resource "aws_route_table_association" "private-rt" {
+    count = length(var.private-subnet-cidr)
 
-#   tags = {
-#     Name = "homely-public-rt"
-#   }
-# }
+  subnet_id      = aws_subnet.private-subnet[count.index].id
+  route_table_id = aws_route_table.private-rt.id
+}
