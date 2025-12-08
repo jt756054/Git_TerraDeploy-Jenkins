@@ -1,6 +1,9 @@
 variable "hosting-bucket" {
   type = string
 }
-variable "" {
-  
+variable "source-index" {
+  type = string
+}
+variable "source-error" {
+  type = string
 }

@@ -14,4 +14,5 @@ module "storage" {
 
   hosting-bucket = var.hosting-bucket
   source-index = var.source-index
+  source-error = var.source-error
 }
