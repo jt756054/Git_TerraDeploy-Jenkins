@@ -17,3 +17,8 @@ variable "instance-tenancy" {
 variable "name-tag" {
   type = map(string)
 }
+
+##storage
+variable "hosting-bucket" {
+  type = string
+}

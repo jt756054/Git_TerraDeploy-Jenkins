@@ -8,3 +8,9 @@ module "network" {
   instance-tenancy = var.instance-tenancy
   name-tag = var.name-tag
 }
+
+module "storage" {
+  source = "../../modules/storage"
+
+  hosting-bucket = var.hosting-bucket
+}
