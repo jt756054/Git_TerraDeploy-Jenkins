@@ -4,6 +4,7 @@ resource "aws_vpc" "homely-vpc" {
 
   tags = var.name-tag
 }
+
 resource "aws_subnet" "public-subnet" {
   vpc_id     = aws_vpc.homely-vpc.id
 
@@ -18,6 +19,7 @@ resource "aws_subnet" "public-subnet" {
     }
   )
 }
+
 resource "aws_subnet" "private-subnet" {
   vpc_id     = aws_vpc.homely-vpc.id
   
@@ -32,6 +34,7 @@ resource "aws_subnet" "private-subnet" {
     }
   )
 }
+
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.homely-vpc.id
 
@@ -39,6 +42,7 @@ resource "aws_internet_gateway" "igw" {
     Name = "homely-igw"
   }
 }
+
 resource "aws_route_table" "public-rt" {
   vpc_id = aws_vpc.homely-vpc.id
 
@@ -52,6 +56,7 @@ resource "aws_route_table" "public-rt" {
     Name = "homely-public-rt"
   }
 }
+
 resource "aws_route_table_association" "public-rt" {
     count = length(var.public-subnet-cidr)
 
@@ -61,6 +66,7 @@ resource "aws_route_table_association" "public-rt" {
 resource "aws_eip" "ngw" {
   domain   = "vpc"
 }
+
 resource "aws_nat_gateway" "private-subnet-ngw" {
   allocation_id = aws_eip.ngw.id
   subnet_id     = aws_subnet.public-subnet[0].id
@@ -71,6 +77,7 @@ resource "aws_nat_gateway" "private-subnet-ngw" {
     Name = "private-subnet-ngw"
   }
 }
+
 resource "aws_route_table" "private-rt" {
   vpc_id = aws_vpc.homely-vpc.id
 
@@ -83,6 +90,7 @@ resource "aws_route_table" "private-rt" {
     Name = "homely-private-rt"
   }
 }
+
 resource "aws_route_table_association" "private-rt" {
     count = length(var.private-subnet-cidr)
 

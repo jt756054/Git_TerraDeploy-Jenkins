@@ -1,3 +1,8 @@
+#provider
+variable "region" {
+  type = string
+}
+
 ##network
 variable "cidr-block" {
   type = string

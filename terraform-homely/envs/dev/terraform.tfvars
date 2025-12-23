@@ -1,3 +1,6 @@
+#provider
+region = "us-east-1"
+
 ##network
 cidr-block = "10.173.0.0/16"
 instance-tenancy = "default"
@@ -10,3 +13,4 @@ availability-zone = [ "us-east-1a", "us-east-1b", "us-east-1c" ]
 
 ##storage
 hosting-bucket = "homely-hosting-bucket-001"
+
