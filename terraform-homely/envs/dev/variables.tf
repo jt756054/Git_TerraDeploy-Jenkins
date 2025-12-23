@@ -1,3 +1,8 @@
+#provider
+variable "region" {
+  type = string
+}
+
 ##network
 variable "cidr-block" {
   type = string
@@ -20,11 +25,5 @@ variable "name-tag" {
 
 ##storage
 variable "hosting-bucket" {
-  type = string
-}
-variable "source-index" {
-  type = string
-}
-variable "source-error" {
   type = string
 }
