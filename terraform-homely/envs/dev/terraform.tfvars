@@ -14,3 +14,7 @@ availability-zone = [ "us-east-1a", "us-east-1b", "us-east-1c" ]
 ##storage
 hosting-bucket = "homely-hosting-bucket-001"
 
+##iam
+iam_role_name = "jenkins-homely-role"
+trusted_service = "ec2.amazonaws.com"
+managed_policy_arns = [ "arn:aws:iam::aws:policy/AdministratorAccess" ] ##not safe for production. security risk. Specify arns for production
