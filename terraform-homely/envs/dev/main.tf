@@ -23,3 +23,10 @@ module "iam_role" {
   trusted_service = var.trusted_service
   managed_policy_arns = var.managed_policy_arns
 }
+
+module "compute" {
+  source = "../../modules/compute"
+
+  ami = var.ami
+  instance_type = var.instance_type
+}
