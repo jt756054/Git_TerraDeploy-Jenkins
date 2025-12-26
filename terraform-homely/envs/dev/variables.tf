@@ -41,3 +41,12 @@ variable "trusted_service" {
 variable "managed_policy_arns" {
   type = list(string)
 }
+
+##compute
+variable "ami" {
+  type = string
+}
+
+variable "instance_type" {
+  type = string
+}
