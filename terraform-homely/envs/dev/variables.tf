@@ -42,6 +42,10 @@ variable "managed_policy_arns" {
   type = list(string)
 }
 
+variable "iam_instance_profile" {
+  type = string
+}
+
 ##compute
 variable "ami" {
   type = string
