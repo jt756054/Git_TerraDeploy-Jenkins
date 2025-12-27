@@ -30,3 +30,8 @@ resource "aws_iam_role_policy_attachment" "jenkins_attach" {
   role       = aws_iam_role.jenkins_role.name
   policy_arn = each.value
 }
+
+resource "aws_iam_instance_profile" "jenkins_profile" {
+  name = var.iam_instance_profile
+  role = aws_iam_role.jenkins_role.name
+}

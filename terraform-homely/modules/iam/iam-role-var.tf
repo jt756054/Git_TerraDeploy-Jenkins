@@ -9,3 +9,7 @@ variable "trusted_service" {
 variable "managed_policy_arns" {
   type = list(string)
 }
+
+variable "iam_instance_profile" {
+  type = string
+}

@@ -18,6 +18,7 @@ hosting-bucket = "homely-hosting-bucket-001"
 iam_role_name = "jenkins-homely-role"
 trusted_service = "ec2.amazonaws.com"
 managed_policy_arns = [ "arn:aws:iam::aws:policy/AdministratorAccess" ] ##not safe for production. security risk. Specify arns for production
+iam_instance_profile = "jenkins_profile"
 
 ##compute
 ami = "ami-0ecb62995f68bb549"
