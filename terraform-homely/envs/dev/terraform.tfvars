@@ -23,3 +23,4 @@ iam_instance_profile = "jenkins_profile"
 ##compute
 ami = "ami-0ecb62995f68bb549"
 instance_type = "t2.medium"
+key_pair = "test-demo-key"

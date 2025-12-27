@@ -30,6 +30,7 @@ module "compute" {
 
   ami = var.ami
   instance_type = var.instance_type
+  key_pair = var.key_pair
   public_subnet_ids = module.network.public_subnet_ids
-  iam_instance_profile_name = module.iam.iam_compute_role_name
+  iam_instance_profile_name = module.iam.jenkins_instance_profile_name
 }

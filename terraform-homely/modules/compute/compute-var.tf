@@ -13,3 +13,7 @@ variable "iam_instance_profile_name" {
 variable "public_subnet_ids" {
   type = list(string)
 }
+
+variable "key_pair" {
+  type = string
+}
