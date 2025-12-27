@@ -17,7 +17,7 @@ module "storage" {
 }
 
 module "iam_role" {
-  source = "../../modules/iam/iam-role"
+  source = "../../modules/iam"
 
   iam_role_name = var.iam_role_name
   trusted_service = var.trusted_service
