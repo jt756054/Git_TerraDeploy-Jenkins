@@ -16,7 +16,7 @@ module "storage" {
 
 }
 
-module "iam_role" {
+module "iam" {
   source = "../../modules/iam"
 
   iam_role_name = var.iam_role_name
@@ -31,5 +31,5 @@ module "compute" {
   ami = var.ami
   instance_type = var.instance_type
   public_subnet_ids = module.network.public_subnet_ids
-  iam_instance_profile_name = module.iam.jenkins_profile_name
+  iam_instance_profile_name = module.iam.iam_compute_role_name
 }
