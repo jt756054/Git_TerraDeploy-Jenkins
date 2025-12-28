@@ -4,12 +4,12 @@ locals {
   }
 }
 
-resource "aws_instance" "example" {
+resource "aws_instance" "jenkins" {
   ami           = var.ami
   instance_type = var.instance_type
 
   subnet_id = var.public_subnet_ids[0]
-
+  key_name = var.key_pair
   iam_instance_profile = var.iam_instance_profile_name
   user_data = file("${path.module}/../../code/user-data.sh")
 
